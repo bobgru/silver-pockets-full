@@ -56,7 +56,8 @@ updateList k@(_, _, dw) c kcs =
 -- Carry out the calculations described above. The variable
 -- weekDayCounts is a list of all the (year,month) pairs for
 -- Fridays, Saturdays, or Sundays that occured 5 times that month.
-weekDayCounts = (map fst . extract . initMap . map mkRecord) days
+weekDayCounts  = (map ym . extract . initMap . map mkRecord) days
+ym ((y,m,_),_) = (y,m)
 
 -- Build another map, this time counting the number of days of the
 -- week for which a (year, month) pair is listed.
@@ -78,7 +79,7 @@ updateList' k c ks
     | otherwise  =  k : ks 
 
 -- Carry out the second phase of the calculation.
-monthCounts = (extract' . initMap . map (\(y,m,_) -> (y,m))) weekDayCounts
+monthCounts = (extract' . initMap) weekDayCounts
 
 -- Show the results.
 main = mapM_ (putStrLn . show) monthCounts
