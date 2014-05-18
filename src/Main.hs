@@ -36,7 +36,7 @@ mkRecord d = (y, m, dw)
           (_, dw)   = sundayStartWeek d
 
 -- Update the map with a new key by adding 1 to its count
--- if the key is already there, or inserting it if its missing.
+-- if the key is already there, or inserting it if it's missing.
 updateMap k m = M.insertWith (+) k 1 m
 
 -- Take a list of encoded days, and "fold" them all into
