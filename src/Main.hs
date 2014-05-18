@@ -68,15 +68,15 @@ ym ((y,m,_),_) = (y,m)
 -- Once again, here's what is in the map, but I can leave them
 -- as comments.
 --
--- type Key2 = (Integer, Int)
--- type MonthCounts = Map Key2 Int
+-- type Key2 = (Year, Month)
+-- type MonthCounts = Map Key2 Count
 
 -- Keep the (year,month) keys for which the count is 3, i.e. the
 -- month was recorded for each of Friday, Saturday, and Sunday.
 extract' = M.foldrWithKey updateList' []
 updateList' k c ks
-    | c /= 3     =  ks
-    | otherwise  =  k : ks 
+    | c == 3     =  k : ks
+    | otherwise  =  ks 
 
 -- Carry out the second phase of the calculation.
 monthCounts = (extract' . initMap) weekDayCounts
